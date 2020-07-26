@@ -1,4 +1,6 @@
+# NAME: dclong/jupyterhub-more
 FROM dclong/jupyterhub-py
+# GIT: https://github.com/dclong/docker-jupyterhub-py.git
 
 # Kotlin kernel
 RUN pip3 install kotlin-jupyter-kernel
