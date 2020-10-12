@@ -9,7 +9,12 @@ RUN pip3 install kotlin-jupyter-kernel
 RUN curl -L -o /usr/local/bin/coursier https://git.io/coursier-cli \
     && chmod +x /usr/local/bin/coursier \
     && /usr/local/bin/coursier launch almond --scala 2.12 --quiet -- --install --global
+    
+# TypeScript kernel
+RUN npm install -g --unsafe-perm itypescript \
+    && its --ts-hide-undefined --install=global
 
+# Rust Kernel
 RUN apt-get update \
     && apt-get install -y cmake cargo \
     && cargo install --force evcxr_jupyter \
