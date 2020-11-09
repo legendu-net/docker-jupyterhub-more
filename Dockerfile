@@ -24,3 +24,4 @@ RUN xinstall -y rustup -ic \
     && apt-get autoremove -y \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
+ENV PATH=/root/.cargo/bin:$PATH
