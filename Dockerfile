@@ -15,9 +15,8 @@ RUN curl -L -o /usr/local/bin/coursier https://git.io/coursier-cli \
 #    && its --ts-hide-undefined --install=global
 
 # Rust Kernel
-RUN apt-get update \
-    && apt-get install -y cmake cargo \
-    && cargo install --force evcxr_jupyter \
+RUN xinstall -y rustup -ic \
+    && /root/.cargo/bin/cargo install --force evcxr_jupyter \
     && /root/.cargo/bin/evcxr_jupyter --install \
     && cp -r /root/.local/share/jupyter/kernels/rust /usr/local/share/jupyter/kernels/ \
     && chmod -R 755 /root
