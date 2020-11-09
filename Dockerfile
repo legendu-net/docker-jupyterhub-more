@@ -15,13 +15,15 @@ RUN curl -L -o /usr/local/bin/coursier https://git.io/coursier-cli \
 #    && its --ts-hide-undefined --install=global
 
 # Rust Kernel
+ENV RUSTUP_HOME=/usr/local/rustup \
+    CARGO_HOME=/usr/local/cargo \
+    PATH=/usr/local/cargo/bin:$PATH
 RUN xinstall -y rustup -ic \
     && apt-get update && apt-get install -y cmake \
-    && /root/.cargo/bin/cargo install --force evcxr_jupyter \
+    && cargo install --force evcxr_jupyter \
     && /root/.cargo/bin/evcxr_jupyter --install \
     && cp -r /root/.local/share/jupyter/kernels/rust /usr/local/share/jupyter/kernels/ \
     && chmod -R 755 /root \
     && apt-get autoremove -y \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
-ENV PATH=/root/.cargo/bin:$PATH
