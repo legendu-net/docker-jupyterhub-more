@@ -15,6 +15,9 @@ RUN curl -L -o /usr/local/bin/coursier https://git.io/coursier-cli \
 #    && its --ts-hide-undefined --install=global
 
 # Rust Kernel
+RUN apt-get update \
+    && apt-get install -y cmake cargo rust-src
+# Rust Kernel
 #ENV RUSTUP_HOME=/usr/local/rustup \
 #    CARGO_HOME=/usr/local/cargo \
 #    PATH=/usr/local/cargo/bin:$PATH
