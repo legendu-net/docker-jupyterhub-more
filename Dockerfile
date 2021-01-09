@@ -15,18 +15,13 @@ RUN curl -L -o /usr/local/bin/coursier https://git.io/coursier-cli \
 #    && its --ts-hide-undefined --install=global
 
 # Rust Kernel
-RUN apt-get update \
-    && apt-get install -y cmake cargo rust-src
-# Rust Kernel
-#ENV RUSTUP_HOME=/usr/local/rustup \
-#    CARGO_HOME=/usr/local/cargo \
-#    PATH=/usr/local/cargo/bin:$PATH
-#RUN xinstall -y rustup -ic \
-#    && apt-get update && apt-get install -y cmake \
-#    && cargo install --force evcxr_jupyter \
-#    && /usr/local/cargo/bin/evcxr_jupyter --install \
-#    && cp -r /root/.local/share/jupyter/kernels/rust /usr/local/share/jupyter/kernels/ \
-#    && chmod -R 755 /root \
-#    && apt-get autoremove -y \
-#    && apt-get clean -y \
-#    && rm -rf /var/lib/apt/lists/*
+RUN apt-add-repository -y ppa:ubuntu-mozilla-security/rust-updates \
+    && apt-get update \
+    && apt-get install -y rustc rust-src cargo cmake \
+    && cargo install --force evcxr_jupyter \
+    && /root/.cargo/bin/evcxr_jupyter --install \
+    && cp -r /root/.local/share/jupyter/kernels/rust /usr/local/share/jupyter/kernels/ \
+    && chmod -R 755 /root \
+    && apt-get autoremove -y \
+    && apt-get clean -y \
+    && rm -rf /var/lib/apt/lists/*
