@@ -11,7 +11,8 @@ RUN curl -L -o /usr/local/bin/coursier https://git.io/coursier-cli \
     && /usr/local/bin/coursier launch almond --scala 2.12 --quiet -- --install --global
     
 # TypeScript kernel
-RUN npm install -g tslab
+RUN npm install -g tslab \
+    && tslab install --python=python3
 
 # Rust Kernel
 RUN apt-add-repository -y ppa:ubuntu-mozilla-security/rust-updates \
