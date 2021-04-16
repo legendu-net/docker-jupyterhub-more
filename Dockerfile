@@ -16,7 +16,9 @@ RUN npm install -g tslab \
 
 # Rust Kernel
 ENV PATH=/root/.cargo/bin:$PATH
-RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | bash -s -- -y \
+RUN apt-get update \
+    && apt-get install -y cmake \
+    && curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | bash -s -- -y \
     && /root/.cargo/bin/cargo install --force evcxr_jupyter \
     && /root/.cargo/bin/evcxr_jupyter --install \
     && cp -r /root/.local/share/jupyter/kernels/rust /usr/local/share/jupyter/kernels/ \
