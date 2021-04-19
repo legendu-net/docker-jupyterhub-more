@@ -19,8 +19,8 @@ ENV PATH=/root/.cargo/bin:$PATH
 RUN apt-get update \
     && apt-get install -y cmake \
     && curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | bash -s -- -y --default-toolchain stable --profile default --no-modify-path \
-    && rustup toolchain install nightly \
-    && rustup default nightly \
+    && rustup toolchain install beta \
+    && rustup default beta \
     && /root/.cargo/bin/cargo install --force evcxr_jupyter \
     && /root/.cargo/bin/evcxr_jupyter --install \
     && cp -r /root/.local/share/jupyter/kernels/rust /usr/local/share/jupyter/kernels/ \
