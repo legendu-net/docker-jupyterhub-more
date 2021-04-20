@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
-rustup install stable
-rustup default stable
+rustup install beta
+rustup default beta
 rustup component add rust-src
