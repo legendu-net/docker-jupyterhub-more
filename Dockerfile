@@ -6,9 +6,9 @@ FROM dclong/jupyterhub-jdk
 RUN pip3 install kotlin-jupyter-kernel
 
 # Scala kernel
-RUN curl -L -o /usr/local/bin/coursier https://git.io/coursier-cli \
-    && chmod +x /usr/local/bin/coursier \
-    && /usr/local/bin/coursier launch almond --scala 2.12 --quiet -- --install --global
+#RUN curl -L -o /usr/local/bin/coursier https://git.io/coursier-cli \
+#    && chmod +x /usr/local/bin/coursier \
+#    && /usr/local/bin/coursier launch almond --scala 2.12 --quiet -- --install --global
     
 # TypeScript kernel
 RUN npm install -g tslab \
