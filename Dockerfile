@@ -23,5 +23,7 @@ RUN xinstall rustup -ic \
     && chmod -R 755 /root \
     && apt-get autoremove -y \
     && apt-get clean -y \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* \
+    && find /root/ -type d -name '.git' | xargs rm -rf
+
 COPY scripts/ /scripts/
