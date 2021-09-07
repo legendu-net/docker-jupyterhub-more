@@ -26,7 +26,7 @@ RUN xinstall rustup -ic \
     && cargo cache --autoclean \
     && apt-get autoremove -y \
     && apt-get clean -y \
-    && rm -rf /var/lib/apt/lists/* \
+    && rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/* \
     && find /root/ -type d -name '.git' | xargs rm -rf
 
 COPY scripts/ /scripts/
