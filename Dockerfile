@@ -3,7 +3,7 @@ FROM dclong/jupyterhub-jdk
 # GIT: https://github.com/dclong/docker-jupyterhub-jdk.git
 
 # Kotlin kernel
-RUN pip3 install kotlin-jupyter-kernel
+RUN pip3 install --no-cache-dir kotlin-jupyter-kernel
 
 # Scala kernel
 #RUN curl -L -o /usr/local/bin/coursier https://git.io/coursier-cli \
