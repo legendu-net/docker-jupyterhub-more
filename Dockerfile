@@ -4,7 +4,7 @@ FROM dclong/jupyterhub-jdk
 
 # Kotlin kernel
 RUN pip3 install kotlin-jupyter-kernel \
-    && pip3 cache purge
+    && /scripts/sys/purge_cache.sh
 
 # Scala kernel
 #RUN curl -L -o /usr/local/bin/coursier https://git.io/coursier-cli \
@@ -22,11 +22,7 @@ RUN xinstall rustup -ic \
     && evcxr_jupyter --install \
     && cp -r /root/.local/share/jupyter/kernels/rust /usr/local/share/jupyter/kernels/ \
     && chmod -R 755 /root \
-    # && pip3 cache purge \
-    && cargo cache --autoclean \
-    && apt-get autoremove -y \
-    && apt-get clean -y \
-    && rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/* \
+    && /scripts/sys/purge_cache.sh \
     && find /root/ -type d -name '.git' | xargs rm -rf
 
 COPY scripts/ /scripts/
