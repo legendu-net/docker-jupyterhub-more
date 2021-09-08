@@ -22,7 +22,7 @@ RUN xinstall rustup -ic \
     && evcxr_jupyter --install \
     && cp -r /root/.local/share/jupyter/kernels/rust /usr/local/share/jupyter/kernels/ \
     && chmod -R 755 /root \
-    && pip3 cache purge \
+    # && pip3 cache purge \
     && cargo cache --autoclean \
     && apt-get autoremove -y \
     && apt-get clean -y \
