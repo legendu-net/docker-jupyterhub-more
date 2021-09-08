@@ -3,7 +3,8 @@ FROM dclong/jupyterhub-jdk
 # GIT: https://github.com/dclong/docker-jupyterhub-jdk.git
 
 # Kotlin kernel
-RUN pip3 install kotlin-jupyter-kernel
+RUN pip3 install kotlin-jupyter-kernel \
+    && /scripts/sys/purge_cache.sh
 
 # Scala kernel
 #RUN curl -L -o /usr/local/bin/coursier https://git.io/coursier-cli \
@@ -21,9 +22,7 @@ RUN xinstall rustup -ic \
     && evcxr_jupyter --install \
     && cp -r /root/.local/share/jupyter/kernels/rust /usr/local/share/jupyter/kernels/ \
     && chmod -R 755 /root \
-    && apt-get autoremove -y \
-    && apt-get clean -y \
-    && rm -rf /var/lib/apt/lists/* \
+    && /scripts/sys/purge_cache.sh \
     && find /root/ -type d -name '.git' | xargs rm -rf
 
 COPY scripts/ /scripts/
