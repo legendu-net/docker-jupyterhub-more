@@ -16,6 +16,7 @@ RUN npm install -g tslab \
     && tslab install --python=python3
 
 # Rust Kernel
+COPY --from=dclong/rust-utils /root/.cargo/bin/* /usr/local/bin/
 ENV PATH=/root/.cargo/bin:$PATH
 RUN xinstall rustup -ic \
     && cargo install --force evcxr_jupyter \
