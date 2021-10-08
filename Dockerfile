@@ -17,9 +17,9 @@ RUN npm install -g tslab \
 
 # Rust Kernel
 COPY --from=dclong/rust-utils /root/.cargo/bin/* /usr/local/bin/
+COPY --from=dclong/evcxr_jupyter /usr/local/bin/evcxr_jupyter /usr/local/bin/
 ENV PATH=/root/.cargo/bin:$PATH
 RUN xinstall rustup -ic \
-    && cargo install --force evcxr_jupyter \
     && evcxr_jupyter --install \
     && cp -r /root/.local/share/jupyter/kernels/rust /usr/local/share/jupyter/kernels/ \
     && chmod -R 755 /root \
