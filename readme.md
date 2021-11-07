@@ -1,6 +1,6 @@
 # dclong/jupyterhub-more [@DockerHub](https://hub.docker.com/r/dclong/jupyterhub-more/) | [@GitHub](https://github.com/dclong/docker-jupyterhub-more)
 
-JupyterHub with Python, Kotlin, Scala and Rust Kernels. 
+JupyterHub with Python, Kotlin, JavaScript, TypeScript and Rust Kernels. 
 
 ## Prerequisite
 You need to [install Docker](http://www.legendu.net/en/blog/docker-installation/) before you use this Docker image.
