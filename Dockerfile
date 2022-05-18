@@ -1,6 +1,6 @@
 # NAME: dclong/jupyterhub-more
 FROM dclong/jupyterhub-jdk
-# GIT: https://github.com/dclong/docker-jupyterhub-jdk.git
+# GIT: https://github.com/legendu-net/docker-jupyterhub-jdk.git
     
 # TypeScript kernel
 RUN npm install -g tslab \
