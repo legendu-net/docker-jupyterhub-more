@@ -10,10 +10,8 @@ RUN npm install -g tslab \
 COPY --from=dclong/rust-utils /root/.cargo/bin/* /usr/local/bin/
 COPY --from=dclong/evcxr_jupyter /root/.cargo/bin/evcxr_jupyter /usr/local/bin/
 ENV PATH=/root/.cargo/bin:$PATH
-RUN xinstall rustup -ic \
-    && evcxr_jupyter --install \
+RUN evcxr_jupyter --install \
     && cp -r /root/.local/share/jupyter/kernels/rust /usr/local/share/jupyter/kernels/ \
-    && chmod -R 755 /root \
     && /scripts/sys/purge_cache.sh \
     && find /root/ -type d -name '.git' | xargs rm -rf
 
@@ -25,6 +23,6 @@ RUN xinstall golang -ic \
     && cp "$(go env GOPATH)"/pkg/mod/github.com/gopherdata/gophernotes@v*/kernel/*  ./ \
     && chmod +w ./kernel.json \
     && sed "s|gophernotes|$(go env GOPATH)/bin/gophernotes|" < kernel.json.in > kernel.json \
-    && chmod -R 777 /root
-    
+   
+RUN chmod -R 777 /root/   
 COPY scripts/ /scripts/
