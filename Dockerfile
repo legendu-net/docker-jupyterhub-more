@@ -16,13 +16,13 @@ RUN evcxr_jupyter --install \
     && find /root/ -type d -name '.git' | xargs rm -rf
 
 # GoLANG Kernel
-RUN xinstall golang -ic \
-    && env GO111MODULE=on go install github.com/gopherdata/gophernotes@latest \
-    && mkdir -p /usr/local/share/jupyter/kernels/gophernotes \
-    && cd /usr/local/share/jupyter/kernels/gophernotes \
-    && cp "$(go env GOPATH)"/pkg/mod/github.com/gopherdata/gophernotes@v*/kernel/*  ./ \
-    && chmod +w ./kernel.json \
-    && sed "s|gophernotes|$(go env GOPATH)/bin/gophernotes|" < kernel.json.in > kernel.json
+#RUN xinstall golang -ic \
+#    && env GO111MODULE=on go install github.com/gopherdata/gophernotes@latest \
+#    && mkdir -p /usr/local/share/jupyter/kernels/gophernotes \
+#    && cd /usr/local/share/jupyter/kernels/gophernotes \
+#    && cp "$(go env GOPATH)"/pkg/mod/github.com/gopherdata/gophernotes@v*/kernel/*  ./ \
+#    && chmod +w ./kernel.json \
+#    && sed "s|gophernotes|$(go env GOPATH)/bin/gophernotes|" < kernel.json.in > kernel.json
    
 RUN chmod -R 777 /root/   
 COPY scripts/ /scripts/
