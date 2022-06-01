@@ -9,7 +9,6 @@ RUN npm install -g tslab \
 # Rust Kernel
 COPY --from=dclong/rust-utils /root/.cargo/bin/* /usr/local/bin/
 COPY --from=dclong/evcxr_jupyter /root/.cargo/bin/evcxr_jupyter /usr/local/bin/
-ENV PATH=/root/.cargo/bin:$PATH
 RUN evcxr_jupyter --install \
     && cp -r /root/.local/share/jupyter/kernels/rust /usr/local/share/jupyter/kernels/ \
     && /scripts/sys/purge_cache.sh \
@@ -21,4 +20,5 @@ COPY --from=dclong/gophernotes:next /root/go/bin/gophernotes /usr/local/go/bin/
 COPY --from=dclong/gophernotes:next /usr/local/share/jupyter/kernels/gophernotes/kernel.json.in /usr/local/share/jupyter/kernels/gophernotes/kernel.json
 
 RUN chmod -R 777 /root/   
+ENV PATH=/root/.cargo/bin:/usr/local/go/bin:$PATH
 COPY scripts/ /scripts/
