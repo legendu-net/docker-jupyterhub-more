@@ -7,7 +7,7 @@ RUN npm install -g tslab \
     && tslab install --python=python3
 
 # Rust
-RUN apt-get install -y cmake \
+RUN apt-get update && apt-get install -y cmake \
         rustc cargo rustfmt rust-src \
     && cargo install cargo-cache
 # evcxr_jupyter
