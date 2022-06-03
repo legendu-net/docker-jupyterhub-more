@@ -6,25 +6,21 @@ FROM dclong/jupyterhub-jdk
 RUN npm install -g tslab \
     && tslab install --python=python3
 
-# Rust Kernel
-COPY --from=dclong/rust-utils /root/.cargo/bin/* /usr/local/bin/
-COPY --from=dclong/evcxr_jupyter /root/.cargo/bin/evcxr_jupyter /usr/local/bin/
-ENV PATH=/root/.cargo/bin:$PATH
-RUN xinstall rustup -ic \
-    && evcxr_jupyter --install \
-    && cp -r /root/.local/share/jupyter/kernels/rust /usr/local/share/jupyter/kernels/ \
-    && chmod -R 755 /root \
-    && /scripts/sys/purge_cache.sh \
-    && find /root/ -type d -name '.git' | xargs rm -rf
+# Rust
+RUN apt-get update && apt-get install -y cmake \
+    && /scripts/sys/purge_cache.sh
+COPY --from=dclong/rust:next /usr/local/bin/* /usr/local/bin/
+COPY --from=dclong/rust:next /usr/local/lib/lib*.so /usr/local/lib/
+COPY --from=dclong/rust:next /usr/local/lib/rustlib/ /usr/local/lib/rustlib/
+# evcxr_jupyter
+COPY --from=dclong/evcxr_jupyter:next /root/.cargo/bin/evcxr_jupyter /usr/local/bin/
+RUN evcxr_jupyter --install \
+    && mv /root/.local/share/jupyter/kernels/rust/ /usr/local/share/jupyter/kernels/    
 
 # GoLANG Kernel
-RUN xinstall golang -ic \
-    && env GO111MODULE=on go install github.com/gopherdata/gophernotes@latest \
-    && mkdir -p /usr/local/share/jupyter/kernels/gophernotes \
-    && cd /usr/local/share/jupyter/kernels/gophernotes \
-    && cp "$(go env GOPATH)"/pkg/mod/github.com/gopherdata/gophernotes@v*/kernel/*  ./ \
-    && chmod +w ./kernel.json \
-    && sed "s|gophernotes|$(go env GOPATH)/bin/gophernotes|" < kernel.json.in > kernel.json \
-    && chmod -R 777 /root
-    
-COPY scripts/ /scripts/
+COPY --from=dclong/gophernotes:next /usr/local/go/ /usr/local/go/
+COPY --from=dclong/gophernotes:next /root/go/bin/gophernotes /usr/local/go/bin/
+COPY --from=dclong/gophernotes:next /usr/local/share/jupyter/kernels/gophernotes/kernel.json.in /usr/local/share/jupyter/kernels/gophernotes/kernel.json
+
+ENV PATH=/usr/local/go/bin:$PATH
+
