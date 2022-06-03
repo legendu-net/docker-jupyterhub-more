@@ -3,7 +3,7 @@ FROM dclong/jupyterhub-jdk
 # GIT: https://github.com/legendu-net/docker-jupyterhub-jdk.git
     
 # TypeScript kernel
-RUN npm install -g tslab \
+RUN npm install --location=global tslab \
     && tslab install --python=python3
 
 # Rust
