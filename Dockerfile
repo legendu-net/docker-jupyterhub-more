@@ -13,8 +13,8 @@ COPY --from=dclong/rust:next /usr/local/bin/* /usr/local/bin/
 COPY --from=dclong/rust:next /usr/local/lib/lib*.so /usr/local/lib/
 COPY --from=dclong/rust:next /usr/local/lib/rustlib/ /usr/local/lib/rustlib/
 # evcxr_jupyter
-COPY --from=dclong/evcxr_jupyter /root/.cargo/bin/evcxr_jupyter /usr/local/bin/
-COPY --from=dclong/evcxr_jupyter /root/.local/share/jupyter/kernels/rust /usr/local/share/jupyter/kernels/
+COPY --from=dclong/evcxr_jupyter:next /root/.cargo/bin/evcxr_jupyter /usr/local/bin/
+COPY --from=dclong/evcxr_jupyter:next /root/.local/share/jupyter/kernels/rust /usr/local/share/jupyter/kernels/
 
 # GoLANG Kernel
 COPY --from=dclong/gophernotes:next /usr/local/go/ /usr/local/go/
@@ -22,5 +22,4 @@ COPY --from=dclong/gophernotes:next /root/go/bin/gophernotes /usr/local/go/bin/
 COPY --from=dclong/gophernotes:next /usr/local/share/jupyter/kernels/gophernotes/kernel.json.in /usr/local/share/jupyter/kernels/gophernotes/kernel.json
 
 ENV PATH=/usr/local/go/bin:$PATH
-COPY scripts/ /scripts/
 
