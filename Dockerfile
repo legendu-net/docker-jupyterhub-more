@@ -9,9 +9,9 @@ RUN npm install --location=global tslab \
 # Rust
 RUN apt-get update && apt-get install -y cmake \
     && /scripts/sys/purge_cache.sh
-COPY --from=dclong/rust:next /usr/local/bin/* /usr/local/bin/
-COPY --from=dclong/rust:next /usr/local/lib/lib*.so /usr/local/lib/
-COPY --from=dclong/rust:next /usr/local/lib/rustlib/ /usr/local/lib/rustlib/
+COPY --from=dclong/rust /usr/local/bin/* /usr/local/bin/
+COPY --from=dclong/rust /usr/local/lib/lib*.so /usr/local/lib/
+COPY --from=dclong/rust /usr/local/lib/rustlib/ /usr/local/lib/rustlib/
 COPY --from=dclong/rust-utils /root/.cargo/bin/{rg,bat,dust,rip} /usr/local/bin/
 
 # evcxr_jupyter
