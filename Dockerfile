@@ -12,7 +12,12 @@ RUN apt-get update && apt-get install -y cmake \
 COPY --from=dclong/rust /usr/local/bin/* /usr/local/bin/
 COPY --from=dclong/rust /usr/local/lib/lib*.so /usr/local/lib/
 COPY --from=dclong/rust /usr/local/lib/rustlib/ /usr/local/lib/rustlib/
-COPY --from=dclong/rust-utils /root/.cargo/bin/{rg,bat,dust,rip} /usr/local/bin/
+COPY --from=dclong/rust-utils \
+    /root/.cargo/bin/rg \
+    /root/.cargo/bin/bat \
+    /root/.cargo/bin/dust \
+    /root/.cargo/bin/rip \
+    /usr/local/bin/
 
 # evcxr_jupyter
 COPY --from=dclong/evcxr_jupyter:next /root/.cargo/bin/evcxr_jupyter /usr/local/bin/
