@@ -27,6 +27,6 @@ RUN evcxr_jupyter --install \
 # GoLANG Kernel
 ENV PATH=/usr/local/go/bin:$PATH
 COPY --from=dclong/gophernotes:next /usr/local/go/ /usr/local/go/
+COPY --from=dclong/gophernotes:next /root/go/bin/gopls /usr/local/go/bin/
 COPY --from=dclong/gophernotes:next /root/go/bin/gophernotes /usr/local/go/bin/
 COPY --from=dclong/gophernotes:next /usr/local/share/jupyter/kernels/gophernotes/kernel.json.in /usr/local/share/jupyter/kernels/gophernotes/kernel.json
-RUN go install golang.org/x/tools/gopls@latest
