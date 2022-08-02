@@ -9,18 +9,8 @@ RUN npm install --location=global tslab \
 # Rust
 RUN apt-get update && apt-get install -y cmake \
     && /scripts/sys/purge_cache.sh
-COPY --from=dclong/rust /usr/local/rustup /usr/local/cargo /usr/local/
-COPY --from=dclong/rust-utils \
-    /root/.cargo/bin/rg \
-    /root/.cargo/bin/bat \
-    /root/.cargo/bin/dust \
-    /root/.cargo/bin/rip \
-    /usr/local/bin/
-
-# evcxr_jupyter
-COPY --from=dclong/evcxr_jupyter:next /root/.cargo/bin/evcxr_jupyter /usr/local/bin/
-RUN evcxr_jupyter --install \
-    && mv /root/.local/share/jupyter/kernels/rust/ /usr/local/share/jupyter/kernels/    
+COPY --from=dclong/evcxr_jupyter /usr/local/rustup /usr/local/cargo /usr/local/
+COPY --from=dclong/evcxr_jupyter /root/.local/share/jupyter/kernels/rust /usr/local/share/jupyter/kernels/  
 
 # GoLANG Kernel
 ENV PATH=/usr/local/go/bin:$PATH
