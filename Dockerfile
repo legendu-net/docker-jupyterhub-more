@@ -7,6 +7,7 @@ RUN npm install --location=global tslab \
     && tslab install --python=python3
 
 # Rust
+ENV PATH=/usr/local/cargo/bin:$PATH
 RUN apt-get update && apt-get install -y cmake \
     && /scripts/sys/purge_cache.sh
 COPY --from=dclong/rust-utils /usr/local/rustup/ /usr/local/rustup/
