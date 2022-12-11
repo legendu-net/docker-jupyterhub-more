@@ -20,3 +20,8 @@ COPY --from=dclong/gophernotes /usr/local/go/ /usr/local/go/
 COPY --from=dclong/gophernotes /root/go/bin/gopls /usr/local/go/bin/
 COPY --from=dclong/gophernotes /root/go/bin/gophernotes /usr/local/go/bin/
 COPY --from=dclong/gophernotes /usr/local/share/jupyter/kernels/gophernotes/kernel.json.in /usr/local/share/jupyter/kernels/gophernotes/kernel.json
+
+# The Ganymede kernel
+RUN icon download_github_release -r allen-ball/ganymede -k jar -K asc -o /tmp/ganymede.jar \
+    && java -jar /tmp/ganymede.jar -i --sys-prefix \
+    && /scripts/sys/purge_cache.sh
