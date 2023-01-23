@@ -10,9 +10,9 @@ RUN npm install --location=global tslab \
 ENV RUSTUP_HOME=/usr/local/rustup PATH=/usr/local/cargo/bin:$PATH
 RUN apt-get update && apt-get install -y cmake \
     && /scripts/sys/purge_cache.sh
-COPY --from=dclong/rust-utils /usr/local/rustup/ /usr/local/rustup/
-COPY --from=dclong/rust-utils /usr/local/cargo/bin /usr/local/cargo/bin
-COPY --from=dclong/rust-utils /root/.local/share/jupyter/kernels/rust/ /usr/local/share/jupyter/kernels/rust/
+COPY --from=dclong/rust-utils:nightly /usr/local/rustup/ /usr/local/rustup/
+COPY --from=dclong/rust-utils:nightly /usr/local/cargo/bin /usr/local/cargo/bin
+COPY --from=dclong/rust-utils:nightly /root/.local/share/jupyter/kernels/rust/ /usr/local/share/jupyter/kernels/rust/
 
 # GoLANG Kernel
 ENV PATH=/usr/local/go/bin:$PATH
