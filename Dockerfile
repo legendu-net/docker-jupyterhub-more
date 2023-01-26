@@ -25,4 +25,5 @@ COPY --from=dclong/gophernotes /usr/local/share/jupyter/kernels/gophernotes/kern
 RUN icon download_github_release -r allen-ball/ganymede -k jar -K asc -o /tmp/ganymede.jar \
     && java -jar /tmp/ganymede.jar -i --sys-prefix \
     && mv /usr/share/jupyter/kernels/ganymede-*-java-*/ /usr/local/share/jupyter/kernels/ \
+    && sed -i 's_/usr/share/jupyter/kernels/_/usr/local/share/jupyter/kernels/_g' /usr/local/share/jupyter/kernels/ganymede*/kernel.json \
     && /scripts/sys/purge_cache.sh
