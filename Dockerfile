@@ -12,6 +12,7 @@ RUN apt-get update && apt-get install -y cmake \
     && /scripts/sys/purge_cache.sh
 COPY --from=dclong/rust-utils /usr/local/rustup/ /usr/local/rustup/
 COPY --from=dclong/rust-utils /usr/local/cargo/bin /usr/local/cargo/bin
+COPY --from=dclong/rust-utils /usr/bin/nperf /usr/bin/
 COPY --from=dclong/rust-utils /root/.local/share/jupyter/kernels/rust/ /usr/local/share/jupyter/kernels/rust/
 
 # GoLANG Kernel
