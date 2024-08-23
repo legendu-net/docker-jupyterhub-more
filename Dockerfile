@@ -3,8 +3,8 @@ FROM dclong/jupyterhub-jdk
 # GIT: https://github.com/legendu-net/docker-jupyterhub-jdk.git
     
 # TypeScript kernel
-RUN npm install --location=global tslab \
-    && tslab install --python=python3
+#RUN npm install -g tslab \
+#    && tslab install --python=python3
 
 # Rust
 ENV RUSTUP_HOME=/usr/local/rustup PATH=/usr/local/cargo/bin:$PATH
