@@ -2,6 +2,9 @@
 FROM dclong/jupyterhub-jdk
 # GIT: https://github.com/legendu-net/docker-jupyterhub-jdk.git
     
+RUN apt-get update && apt-get install -y fzf \
+    && /scripts/sys/purge_cache.sh
+
 # TypeScript kernel
 #RUN npm install -g tslab \
 #    && tslab install --python=python3
