@@ -5,6 +5,8 @@ FROM dclong/jupyterhub-jdk
 RUN apt-get update && apt-get install -y fzf \
     && /scripts/sys/purge_cache.sh
 
+RUN npm install -g @google/gemini-cli
+
 # TypeScript kernel
 #RUN npm install -g tslab \
 #    && tslab install --python=python3
