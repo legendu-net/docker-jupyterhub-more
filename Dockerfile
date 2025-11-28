@@ -22,10 +22,8 @@ COPY --from=dclong/rust-utils /root/.local/share/jupyter/kernels/rust/ /usr/loca
 
 # GoLANG Kernel
 ENV PATH=/usr/local/go/bin:$PATH
-COPY --from=dclong/gophernotes /usr/local/go/ /usr/local/go/
-COPY --from=dclong/gophernotes /root/go/bin/gopls /usr/local/go/bin/
-COPY --from=dclong/gophernotes /root/go/bin/gophernotes /usr/local/go/bin/
-COPY --from=dclong/gophernotes /usr/local/share/jupyter/kernels/gophernotes/kernel.json.in /usr/local/share/jupyter/kernels/gophernotes/kernel.json
+RUN icon golang -ic \
+    && /scripts/sys/purge_cache.sh
 
 # The Ganymede kernel
 RUN icon download_github_release -r allen-ball/ganymede -k jar -K asc -o /tmp/ganymede.jar \
