@@ -22,7 +22,7 @@ COPY --from=dclong/rust-utils /root/.local/share/jupyter/kernels/rust/ /usr/loca
 
 # GoLANG Kernel
 ENV PATH=/usr/local/go/bin:$PATH
-RUN icon golang -ic \
+RUN icon golang -ic --copy \
     && /scripts/sys/purge_cache.sh
 
 # The Ganymede kernel
