@@ -2,6 +2,8 @@
 FROM dclong/jupyterhub-jdk
 # GIT: https://github.com/legendu-net/docker-jupyterhub-jdk.git
     
+COPY scripts /scripts
+
 RUN apt-get update && apt-get install -y fzf \
     && /scripts/sys/purge_cache.sh
 
