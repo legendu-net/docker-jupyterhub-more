@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-icon zellij -c
+su -m $DOCKER_USER -c "icon zellij -c"
 
