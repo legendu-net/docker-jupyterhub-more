@@ -4,7 +4,7 @@ FROM dclong/jupyterhub-jdk
     
 COPY scripts /scripts
 
-RUN apt-get update && apt-get install -y fzf \
+RUN apt-get -y update && apt-get -y install fzf \
     && /scripts/sys/purge_cache.sh
 
 RUN npm install -g @google/gemini-cli
@@ -15,7 +15,7 @@ RUN npm install -g @google/gemini-cli
 
 # Rust
 ENV RUSTUP_HOME=/usr/local/rustup PATH=/usr/local/cargo/bin:$PATH
-RUN apt-get update && apt-get install -y cmake \
+RUN apt-get -y update && apt-get -y install cmake \
     && /scripts/sys/purge_cache.sh
 COPY --from=dclong/rust-utils /usr/local/rustup/ /usr/local/rustup/
 COPY --from=dclong/rust-utils /usr/local/cargo/bin /usr/local/cargo/bin
